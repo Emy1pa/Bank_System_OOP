@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void ReadClientInfo(clsBankClient &Client){
+void ReadClientInfo(clsBankClient& Client) {
 	cout << "\nEnter FirstName: ";
 	Client.FirstName = clsInputValidate::ReadString();
 
@@ -24,7 +24,7 @@ void ReadClientInfo(clsBankClient &Client){
 	Client.AccountBalance = clsInputValidate::ReadFloatNumber();
 }
 
-void UpdateClient() {
+/*void UpdateClient() {
 	string AccountNumber = "";
 	cout << "\nPlease Enter client Account Number: ";
 	AccountNumber = clsInputValidate::ReadString();
@@ -41,6 +41,7 @@ void UpdateClient() {
 	cout << "\n____________________\n";
 
 	ReadClientInfo(Client1);
+
 	clsBankClient::enSaveResults SaveResult = Client1.Save();
 	switch (SaveResult)
 	{
@@ -52,11 +53,43 @@ void UpdateClient() {
 		cout << "\nError account was not saved because it's Empty";
 		break;
 	}
+}*/
+
+void AddNewClient() {
+	string AccountNumber = "";
+	cout << "\nPlease Enter Account Number: ";
+	AccountNumber = clsInputValidate::ReadString();
+	while (clsBankClient::IsClientExist(AccountNumber)) {
+		cout << "\nAccount Number Is Already User, Choose another one: ";
+		AccountNumber = clsInputValidate::ReadString();
+	}
+
+	clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+	ReadClientInfo(NewClient);
+
+	clsBankClient::enSaveResults SaveResult;
+
+	SaveResult = NewClient.Save();
+
+	switch (SaveResult)
+	{
+	case clsBankClient::enSaveResults::svFailedEmptyObject:
+		cout << "\nError account was not saved because it's Empty";
+		break;
+	case clsBankClient::enSaveResults::svSucceeded:
+		cout << "\nAccount Addeded Successfully :-)\n";
+		NewClient.Print();
+		break;
+	case clsBankClient::enSaveResults::svFaildAccountNumberExists:
+		cout << "\nError account was not saved because account number is used!\n";
+		break;
+	
+	}
 }
 
 int main()
 {
-	UpdateClient();
+	
 
 	system("pause>0");
 	return 0;
