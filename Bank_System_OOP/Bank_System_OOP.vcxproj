@@ -130,6 +130,7 @@
     <ClCompile Include="Bank_System_OOP.cpp" />
     <ClCompile Include="clsDate.cpp" />
     <ClCompile Include="clsPerson.cpp" />
+    <ClCompile Include="clsUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clsBankClient.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="clsInputValidate.h" />
     <ClInclude Include="clsPerson.h" />
     <ClInclude Include="clsString.h" />
+    <ClInclude Include="clsUtil.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

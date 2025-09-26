@@ -24,6 +24,9 @@
     <ClCompile Include="clsDate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clsUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clsBankClient.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="clsDate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
