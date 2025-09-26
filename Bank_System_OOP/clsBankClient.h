@@ -18,6 +18,7 @@ private:
     string _AccountNumber;
     string _PinCode;
     float _AccountBalance;
+    bool _MarkedForDelete = false;
 
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
     {
@@ -62,8 +63,10 @@ private:
         string DataLine;
         if (MyFile.is_open()) {
             for (clsBankClient C : vClients) {
-                DataLine = _ConverClientObjectToLine(C);
-                MyFile << DataLine << endl;
+                if (C.MarkedFordeleted() == false) {
+                    DataLine = _ConverClientObjectToLine(C);
+                    MyFile << DataLine << endl;
+                }
             }
             MyFile.close();
         }
@@ -84,6 +87,7 @@ private:
     void _AddNew() {
         _AddDataLineToFile(_ConverClientObjectToLine(*this));
     }
+
     void _AddDataLineToFile(string stDataLine){
         fstream MyFile;
         MyFile.open("Clients.txt", ios::out | ios::app);
@@ -113,6 +117,10 @@ public:
     bool IsEmpty()
     {
         return (_Mode == enMode::EmptyMode);
+    }
+
+    bool MarkedFordeleted() {
+        return _MarkedForDelete;
     }
 
     string AccountNumber()
@@ -250,5 +258,18 @@ public:
 
     static clsBankClient GetAddNewClientObject(string AccountNumber){
         return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
+    }
+
+    bool Delete() {
+        vector <clsBankClient> _vClients = _LoadClientsDataFromFile();
+        for (clsBankClient& C : _vClients) {
+            if (C.AccountNumber() == AccountNumber()) {
+                C._MarkedForDelete = true;
+                break;
+            }
+        }
+        _SaveClientsDataToFile(_vClients);
+        *this = _GetEmptyClientObject();
+        return true;
     }
 };
