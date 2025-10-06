@@ -59,6 +59,18 @@ public:
 		return false;
 	}
 
+	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+
+
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		int Number;

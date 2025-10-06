@@ -4,6 +4,8 @@
 #include "clsInputValidate.h"
 #include "clsUtil.h"
 
+#include "clsMainScreen.h"
+
 using namespace std;
 
 /*void ReadClientInfo(clsBankClient& Client) {
@@ -157,13 +159,13 @@ using namespace std;
 
 }*/
 
-void PrintClientRecordBalanceLine(clsBankClient Client){
+/*void PrintClientRecordBalanceLine(clsBankClient Client) {
 	cout << "| " << setw(15) << left << Client.AccountNumber();
 	cout << "| " << setw(40) << left << Client.FullName();
 	cout << "| " << setw(12) << left << Client.AccountBalance;
-}
+}*/
 
-void ShowTotalBalances() {
+/*void ShowTotalBalances() {
 	vector <clsBankClient> vClients = clsBankClient::GetClientsList();
 	cout << "\n\t\t\t\t\tBalances List (" << vClients.size() << ") Client(s).";
 	cout << "\n_______________________________________________________";
@@ -189,12 +191,12 @@ void ShowTotalBalances() {
 	cout << "\t\t\t\t\t   ( " << clsUtil::NumberToText(TotalBalances) << ")";
 
 }
-
+*/
 
 int main()
 {
+	clsMainScreen::ShowMainMenu();
 	
-	ShowTotalBalances();
 	system("pause>0");
 	return 0;
 }
