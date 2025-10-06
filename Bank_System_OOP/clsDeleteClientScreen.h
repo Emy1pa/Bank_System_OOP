@@ -4,6 +4,7 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 
+using namespace std;
 
 class clsDeleteClientScreen : protected clsScreen {
 
@@ -52,7 +53,6 @@ public:
             } else 
                 cout << "\nError Client Was not Deleted\n";
         }
-
     }
 };
 

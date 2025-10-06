@@ -5,6 +5,8 @@
 #include "clsScreen.h"
 #include "clsBankClient.h"
 
+using namespace std;
+
 class clsClientListScreen : protected clsScreen {
 
 private:
