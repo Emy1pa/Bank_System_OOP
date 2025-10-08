@@ -5,26 +5,31 @@
 #include "clsMainScreen.h"
 #include "clsUser.h"
 #include "Global.h"
-
+#include "clsDate.h"
 
 class clsLoginScreen : protected clsScreen {
 
 private:
-	static void _Login() {
+	static bool _Login() {
+
 		bool LoginFailed = false;
-		short FailedCounter = 3;
+		short FailedCounter = 0;
 
 		string UserName, Password;
 		
 		do
 		{
 			if (LoginFailed) {
+				FailedCounter++;
 				cout << "\nInvlaid Username/Password!\n";
+				cout << "You have " << (3-FailedCounter)<< " trial(s) left to login.\n\n";
+			}
 
+			if (FailedCounter == 3) {
+				cout << "\nYou are locked after 3 failed trials.\n";
+				return false;
 			}
 			
-			
-
 			cout << "Enter Username? ";
 			cin >> UserName;
 
@@ -37,18 +42,19 @@ private:
 
 		} while (LoginFailed);
 
-		if (FailedCounter == 0) {
-			cout << "You are Locked after 3 failed trails \n";
-
-		} 
 		clsMainScreen::ShowMainMenu();
+		return true;
 	}
 
+	
+
+
+
 public:
-	static void ShowLoginScreen() {
+	static bool ShowLoginScreen() {
 		system("cls");
 		_DrawScreenHeader("\t  Login Screen");
-		_Login();
+		return _Login();
 	}
 };
 

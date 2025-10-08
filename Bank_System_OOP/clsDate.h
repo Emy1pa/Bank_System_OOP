@@ -12,7 +12,6 @@ using namespace std;
 
 class clsDate
 {
-
 private:
 
 	short _Day = 1;
@@ -107,6 +106,7 @@ public:
 
 		return clsDate(Day, Month, Year);
 	}
+	
 
 	static	bool IsValidDate(clsDate Date)
 	{
