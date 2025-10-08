@@ -6,19 +6,24 @@
 #include "clsUser.h"
 #include "Global.h"
 
+
 class clsLoginScreen : protected clsScreen {
 
 private:
 	static void _Login() {
 		bool LoginFailed = false;
+		short FailedCounter = 3;
 
 		string UserName, Password;
 		
 		do
 		{
 			if (LoginFailed) {
-				cout << "\nInvlaid Username/Password!\n\n";
+				cout << "\nInvlaid Username/Password!\n";
+
 			}
+			
+			
 
 			cout << "Enter Username? ";
 			cin >> UserName;
@@ -32,6 +37,10 @@ private:
 
 		} while (LoginFailed);
 
+		if (FailedCounter == 0) {
+			cout << "You are Locked after 3 failed trails \n";
+
+		} 
 		clsMainScreen::ShowMainMenu();
 	}
 
