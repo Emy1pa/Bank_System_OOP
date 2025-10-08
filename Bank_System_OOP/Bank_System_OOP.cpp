@@ -12,7 +12,10 @@ using namespace std;
 int main()
 {
 	//clsMainScreen::ShowMainMenu();
+	while (true) {
 	clsLoginScreen::ShowLoginScreen();
+
+	}
 
 	
 	system("pause>0");

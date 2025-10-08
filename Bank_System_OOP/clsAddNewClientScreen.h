@@ -45,6 +45,8 @@ private:
 
 public:
     static void ShowAddNewClientScreen() {
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients))
+            return;
         _DrawScreenHeader("\t  Add New Client Screen");
 
         string AccountNumber = "";

@@ -26,6 +26,8 @@ private:
 public:
     static void ShowDeleteUserScreen()
     {
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients))
+            return;
         _DrawScreenHeader("\tDelete User Screen");
 
         string UserName = "";
