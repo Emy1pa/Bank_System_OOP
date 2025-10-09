@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 #include "clsPerson.h"
 #include "clsString.h"
-#include <vector>
-#include <fstream>
+#include "Global.h"
 
 using namespace std;
 
@@ -37,7 +38,8 @@ private:
         stClientRecord += Client.Phone + Seperator;
         stClientRecord += Client.AccountNumber() + Seperator;
         stClientRecord += Client.PinCode + Seperator;
-        stClientRecord += to_string(Client.AccountBalance);
+        stClientRecord += to_string(Client.AccountBalance) + Seperator;
+        stClientRecord += CurrentUser.UserName;
 
         return stClientRecord;
     }
@@ -101,6 +103,32 @@ private:
     {
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
+
+    string _PrepareTransferRecord(clsBankClient DestinationClient, float Amount, string UserName, string Seperator = "#//#") {
+        string TransferRecord = "";
+        TransferRecord += clsDate::GetSystemDateToString() + Seperator;
+        TransferRecord += AccountNumber() + Seperator;
+        TransferRecord += DestinationClient.AccountNumber() + Seperator;
+        TransferRecord += to_string(Amount) + Seperator;
+        TransferRecord += to_string(AccountBalance) + Seperator;
+        TransferRecord += to_string(DestinationClient.AccountBalance) + Seperator;
+        TransferRecord += UserName;
+        return TransferRecord;
+    }
+
+   void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName){
+       string stDataLine = _PrepareTransferRecord(DestinationClient, Amount, UserName);
+
+       fstream MyFile;
+
+       MyFile.open("TransferLog.txt", ios::out | ios::app);
+
+       if (MyFile.is_open())
+       {
+           MyFile << stDataLine << endl;
+           MyFile.close();
+       }
+   }
 
 public:
 
@@ -300,11 +328,12 @@ public:
         }
     }
 
-    bool Transfer(float Amount, clsBankClient &DestinationClient){
+    bool Transfer(float Amount, clsBankClient &DestinationClient, string UserName){
         if (Amount > AccountBalance)
             return false;
         Withdraw(Amount);
         DestinationClient.Deposit(Amount);
+        _RegisterTransferLog(Amount, DestinationClient, UserName);
         return true;
     }
 };
