@@ -42,11 +42,15 @@ private:
 
 		} while (LoginFailed);
 
+		CurrentUser.RegisterLogin();
 		clsMainScreen::ShowMainMenu();
 		return true;
 	}
 
 	
+
+	
+
 
 
 

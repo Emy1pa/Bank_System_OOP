@@ -147,6 +147,14 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    string _PrepareLogInRecord(string Seperator = "#//#") {
+        string LoginRecord = "";
+        LoginRecord += clsDate::GetSystemDateToString() + Seperator;
+        LoginRecord += UserName + Seperator;
+        LoginRecord += Password + Seperator;
+        LoginRecord += to_string(Permissions);
+        return LoginRecord;
+    }
 public:
     
     enum enPermissions {
@@ -353,6 +361,21 @@ public:
             return true;
         else
             return false;
+    }
+
+    void RegisterLogin() {
+        string stDataLine = _PrepareLogInRecord();
+
+        fstream MyFile;
+
+        MyFile.open("LoginRegister.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+            MyFile << stDataLine << endl;
+            MyFile.close();
+        }
+
     }
 };
 
