@@ -21,6 +21,8 @@ private:
     float _AccountBalance;
     bool _MarkedForDelete = false;
 
+    struct stTransferLogScreen;
+
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
     {
         vector<string> vClientData;
@@ -130,6 +132,23 @@ private:
        }
    }
 
+   static stTransferLogScreen _ConvertTransferLogLineToRecord(string Line, string Seperator = "#//#")
+   {
+       stTransferLogScreen TransferLogRecord;
+
+       vector <string> TransferLog = clsString::Split(Line, Seperator);
+       TransferLogRecord.DateTime = TransferLog[0];
+       TransferLogRecord.SourceAccountNumber = TransferLog[1];
+       TransferLogRecord.DestinationAccountNumber = TransferLog[2];
+       TransferLogRecord.Amount = stof(TransferLog[3]);
+       TransferLogRecord.SourceBalance = stof(TransferLog[4]);
+       TransferLogRecord.DestinationBalance = stof(TransferLog[5]);
+       TransferLogRecord.UserName = TransferLog[6];
+
+       return TransferLogRecord;
+
+   }
+
 public:
 
     clsBankClient(enMode Mode, string FirstName, string LastName,
@@ -141,6 +160,18 @@ public:
         _PinCode = PinCode;
         _AccountBalance = AccountBalance;
     }
+
+    struct stTransferLogScreen
+    {
+        string DateTime;
+        string SourceAccountNumber;
+        string DestinationAccountNumber;
+        float Amount;
+        float SourceBalance;
+        float DestinationBalance;
+        string UserName;
+
+    };
 
     bool IsEmpty()
     {
@@ -335,5 +366,26 @@ public:
         DestinationClient.Deposit(Amount);
         _RegisterTransferLog(Amount, DestinationClient, UserName);
         return true;
+    }
+
+    static vector <stTransferLogScreen> GetTransferLogList() {
+
+        vector <stTransferLogScreen> vTransferLogRecord;
+
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::in);//read Mode
+
+        if (MyFile.is_open())
+        {
+            string Line;
+            stTransferLogScreen TransferLogRecord;
+
+            while (getline(MyFile, Line)) {
+                TransferLogRecord = _ConvertTransferLogLineToRecord(Line);
+                vTransferLogRecord.push_back(TransferLogRecord);
+            }
+            MyFile.close();
+        }
+        return vTransferLogRecord;
     }
 };
