@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "InterfaceCommunication.h"
+
 using namespace std;
 
-class clsPerson
+class clsPerson : public InterfaceCommunication
 {
 private:
     string _FirstName;
@@ -20,6 +22,7 @@ public:
         _Phone = Phone;
     }
 
+
     void SetFirstName(string FirstName)
     {
         _FirstName = FirstName;
@@ -29,6 +32,7 @@ public:
     {
         return _FirstName;
     }
+
     __declspec(property(get = GetFirstName, put = SetFirstName)) string FirstName;
 
     void SetLastName(string LastName)
@@ -40,6 +44,7 @@ public:
     {
         return _LastName;
     }
+
     __declspec(property(get = GetLastName, put = SetLastName)) string LastName;
 
     void SetEmail(string Email)
@@ -51,6 +56,7 @@ public:
     {
         return _Email;
     }
+
     __declspec(property(get = GetEmail, put = SetEmail)) string Email;
 
     void SetPhone(string Phone)
@@ -62,6 +68,7 @@ public:
     {
         return _Phone;
     }
+
     __declspec(property(get = GetPhone, put = SetPhone)) string Phone;
 
     string FullName()
@@ -82,5 +89,19 @@ public:
 
     }
 
+    void SendEmail(string Title, string Body)
+    {
+
+    }
+
+    void SendFax(string Title, string Body)
+    {
+
+    }
+
+    void SendSMS(string Title, string Body)
+    {
+
+    }
 };
 
