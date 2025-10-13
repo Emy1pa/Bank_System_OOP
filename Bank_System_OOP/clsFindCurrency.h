@@ -39,9 +39,6 @@ private:
         cout << "\nName       : " << Currency.CurrencyName();
         cout << "\nRate(1$) = : " << Currency.Rate();
         cout << "\n_____________________________\n";
-
-
-
     }
 
     static void _ShowResults(clsCurrency Currency) {

@@ -150,7 +150,7 @@ public:
     {
         return _CurrencyName;
     }
-
+    
     void UpdateRate(float NewRate)
     {
         _Rate = NewRate;
