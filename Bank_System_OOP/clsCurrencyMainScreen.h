@@ -4,6 +4,7 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsCurrenciesListScreen.h"
+#include "clsFindCurrency.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ private:
     }
 
     static void _GoBackToMainMenu() {
-        cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
+        cout << setw(37) << left << "" << "\n\tPress any key to go back to Currencies Menue...\n";
         system("pause>0");
         ShowCurrencyMenu();
     }
@@ -34,8 +35,8 @@ private:
     }
 
     static void _ShowFindCurrencyScreen() {
-        cout << "\nFind Currency Screen Will be here...\n";
-
+        //cout << "\nFind Currency Screen Will be here...\n";
+        clsFindCurrency::ShowFindCurrencyScreen();
     }
     static void _ShowUpdateRateScreen() {
         cout << "\nUpdate Rate Screen Will be here...\n";

@@ -52,7 +52,6 @@ public:
 		return false;
 	}
 
-
 	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		short Number;
