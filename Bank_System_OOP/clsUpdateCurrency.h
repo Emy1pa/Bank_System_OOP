@@ -13,7 +13,7 @@ private:
     static float _ReadNewCurrencyRate()
     {
         cout << "\nEnter New Rate: ";
-        float NewRate = clsInputValidate::ReadFloatNumber();
+        float NewRate = clsInputValidate::ReadNumber<float>();
         return NewRate;
     }
 

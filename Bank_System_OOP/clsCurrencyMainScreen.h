@@ -21,7 +21,7 @@ private:
 
     static short _ReadCurrencyMenuOption() {
         cout << setw(37) << left << "" << "Choose what do you want to do ? [1 to 5] ? ";
-        short Choice = clsInputValidate::ReadIntNumberBetween(1, 5, "Enter Number between 1 to 5? ");
+        short Choice = clsInputValidate::ReadNumberBetween<int>(1, 5, "Enter Number between 1 to 5? ");
         return Choice;
     }
 

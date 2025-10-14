@@ -12,7 +12,7 @@ private:
 
     static short _ReadCurrencyOption() {
         cout << "Find By: [1] Code or [2] Country ? ";
-        short Choice = clsInputValidate::ReadIntNumberBetween(1, 2, "Enter Number between 1 & 2? ");
+        short Choice = clsInputValidate::ReadNumberBetween<int>(1, 2, "Enter Number between 1 & 2? ");
         return Choice;
     }
 
